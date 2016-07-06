@@ -1,8 +1,8 @@
 package net.thewiseoptimist.cookiechomper;
 
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,9 +12,9 @@ import java.text.NumberFormat;
  * The type Main activity.
  */
 public class MainActivity extends AppCompatActivity {
-    int quantity, price;
     TextView quantityTextView;
     TextView priceTextView;
+    private int quantity, price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         quantity = 2;
         price = 5;
         quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + quantity);
+        String quantityString = "" + quantity;
+        quantityTextView.setText(quantityString);
         priceTextView = (TextView) findViewById(R.id.price_text_view);
     }
 
@@ -33,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
      * @param view the view
      */
     public void submitOrder(View view) {
-        display(quantity);
-        displayPrice(quantity * price);
+//        displayPrice(quantity * price);
+        String priceMessage = "Total $" + (quantity * price);
+        priceMessage += "\nThank You!";
+        displayMessage(priceMessage);
     }
 
 
@@ -47,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
 
+    /**
+     * Display message.
+     *
+     * @param message the message
+     */
+    private void displayMessage(String message) {
+        priceTextView.setText(message);
+    }
 
     /**
      * Display. Helper method that displays the given quantity value on the screen.
@@ -55,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void display(int number) {
         quantity = number;
+        String quantityString = "" + quantity;
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + quantity);
+        quantityTextView.setText(quantityString);
     }
 
     public void increment(View view) {
